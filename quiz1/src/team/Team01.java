@@ -25,7 +25,7 @@ public class Team01 {
 
 		//car의 엔지니어를 [정엔진]씨로 바꾸고, 엔지니어의 이름을 출력해주세요
 		((AMG)car).engineer = engineer2;
-		System.out.println("바꾼 엔지니어 이름 => " + ((AMG)car).engineer.name);
+		System.out.println("바꾼 엔지니어 이름 => " + ((AMG)car).engineer.name + "\n");
 
 		benzList.add(benz);
 		benzList.add(amg);
@@ -34,29 +34,39 @@ public class Team01 {
 		//다운캐스팅
 		//benzList.add(car);
 		benzList.add((Benz)car);
-		System.out.println("마지막으로 추가한 모델 => " + ((Benz)benzList.get(2)).model);
+		System.out.println("마지막으로 추가한 모델 => " + ((Benz)benzList.get(2)).model + "\n");
 
 		//논리적 예외 1
 		System.out.print("몇 번째 차를 조회할까요? : ");
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 
-		try{
-			int n = Integer.parseInt(bf.readLine());
-			Benz myBenz = benzList.get(n);
-			System.out.println("모델명 : " + myBenz.model);
-		}catch (Exception e) {
-			System.out.println("해당 차가 존재하지 않습니다.");
-		}
+		boolean flag1 = true;
+		do {
+			try{
+				int n = Integer.parseInt(bf.readLine());
+				Benz myBenz = benzList.get(n);
+				System.out.println("모델명 : " + myBenz.model + "\n");
+				flag1 = false;
+			}catch (Exception e) {
+				System.out.print("해당 차가 존재하지 않습니다.\n다시 입력하세요 : ");
+			}
+		}while(flag1);
+
 
 		//논리적 예외 2
-		try {
-			System.out.print("마력을 입력하세요 : ");
-			int inputHP = Integer.parseInt(bf.readLine());
-			Benz yourBenz = new Benz(inputHP, "님이 산 차");
-			System.out.println(yourBenz.model + "의 마력은 " + yourBenz.HP + " 입니다.");
-		}catch(RuntimeException e) {
-			System.out.println("님이 산 차의 " + e.getMessage());
-		}
+		boolean flag2 = true;
+		do {
+			try {
+				System.out.print("마력을 입력하세요 : ");
+				int inputHP = Integer.parseInt(bf.readLine());
+				Benz yourBenz = new Benz(inputHP, "님이 산 차");
+				System.out.println(yourBenz.model + "의 마력은 " + yourBenz.HP + " 입니다.");
+				flag2 = false;
+			}catch(RuntimeException e) {
+				System.out.println("님이 산 차의 " + e.getMessage() + "\n다시 입력하세요.");
+			}
+		}while(flag2);
+
 	}
 
 }
